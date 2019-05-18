@@ -16,11 +16,10 @@ def vt_api_url_post(urlToGetReport, api_key):
     return requests.post(url, params)
 
 
-def vt_api_post_ip_report(ip_address, api_key):
-    params = {'apikey': api_key}
-    params['ip'] = ip_address
-    url = 'https://www.virustotal.com/vtapi/v2/ip-address/report'
-    return requests.get(url, params)
+def vt_api_helper(endpoint, method, **kwargs):
+    base_url = 'https://www.virustotal.com/vtapi/'
+    full_url = f'{base_url}{endpoint}'
+    return requests.request(method, full_url, params=kwargs)
 
 
 @action
@@ -34,7 +33,11 @@ def hash_report(file_hash, api_key):
 @action
 def ip_report(ip_address, api_key):
     # TODO: Add IP address validation
-    result = vt_api_post_ip_report(ip_address, api_key)
+    helper_kwargs = {"ip": ip_address,
+                     "apikey": api_key,
+                     }
+    api_endpoint = "v2/ip-address/report"
+    result = vt_api_helper(api_endpoint, "GET", **helper_kwargs)
     resultObject = result.json()
     ip_report_result = resultObject
     return ip_report_result, "IPAddressReport"
