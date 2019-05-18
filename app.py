@@ -12,22 +12,6 @@ def test():
     logger.debug("This is a another test from {}".format(socket.gethostname()))
     return {"message": "FN Agile FROM {}".format(socket.gethostname())}
 
-
-@action
-def repeat_back_to_me(call):
-    return "REPEATING: " + call
-
-
-@action
-def return_plus_one(number):
-    return number + 1
-
-
-@action
-def pause(seconds):
-    time.sleep(seconds)
-
-
 class Test(App):
     """This app defines the same actions as above, but bound to an app instance. This instance will keep track fo how
     many total actions are called for this app's instance.
@@ -39,29 +23,6 @@ class Test(App):
         self.introMessage = {"message": "HELLO WORLD FROM {}".format(socket.gethostname())}
         self.total_called_functions = 0
 
-    @action
-    def test_bound(self):
-        self.total_called_functions += 1
-        return self.introMessage
-
-    @action
-    def repeat_back_to_me_bound(self, call):
-        self.total_called_functions += 1
-        return "REPEATING: " + call
-
-    @action
-    def return_plus_one_bound(self, number):
-        self.total_called_functions += 1
-        return number + 1
-
-    @action
-    def pause_bound(self, seconds):
-        self.total_called_functions += 1
-        time.sleep(seconds)
-
-    @action
-    def total_actions_called(self):
-        return self.total_called_functions
 
     def shutdown(self):
         return
