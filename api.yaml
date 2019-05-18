@@ -29,4 +29,22 @@ actions:
               type: number
             Report:
               type: object
+  virus total ip report:
+    run: app.ip_report
+    description: Returns Virus Total IP Report
+    parameters:
+      - name: ip_address
+        description: The IP Address to be checked
+        type: string
+        required: true
+      - name: api_key
+        description: Virus Total API Key
+        type: string
+        required: true
+    returns:
+      IPAddressReport:
+        schema:
+          type: object
+
+
 
