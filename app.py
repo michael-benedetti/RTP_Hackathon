@@ -55,7 +55,11 @@ def url_report(url, api_key):
 
 @action
 def domain_report(domain, api_key):
-    result = vt_api_post_domain(domain, api_key)
+    helper_kwargs = {"domain": domain,
+                     "apikey": api_key,
+                     }
+    api_endpoint = "v2/domain/report"
+    result = vt_api_helper(api_endpoint, "GET", **helper_kwargs)
     resultObject = result.json()
     domain_report_result = resultObject
     return domain_report_result, "DomainReport"
