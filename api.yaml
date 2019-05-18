@@ -8,8 +8,8 @@ info:
   license:
     name: Creative Commons
 actions:
-  is file malicious:
-    run: app.is_file_malicious
+  is file hash malicious:
+    run: app.is_file_hash_malicious
     description: Returns True or False whether a file is identified as malicious or not by Virus Total
     parameters:
       - name: file_hash
@@ -21,6 +21,6 @@ actions:
         type: string
         required: true
     returns:
-      Malicious:
+      MaliciousConfidence:
         schema:
-          type: boolean
+          type: number
