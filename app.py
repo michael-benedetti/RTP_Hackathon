@@ -22,6 +22,13 @@ def vt_api_helper(endpoint, method, **kwargs):
     return requests.request(method, full_url, params=kwargs)
 
 
+def vt_api_post_domain(domain, api_key):
+    params = {'apikey': api_key}
+    params['domain'] = domain
+    url = 'https://www.virustotal.com/vtapi/v2/domain/report'
+    return requests.get(url, params)
+
+
 @action
 def hash_report(file_hash, api_key):
     result = vt_api_post(file_hash, api_key)
@@ -47,3 +54,11 @@ def ip_report(ip_address, api_key):
 def url_report(url, api_key):
     result = vt_api_url_post(url, api_key)
     return result.json(), "Report"
+
+
+@action
+def domain_report(domain, api_key):
+    result = vt_api_post_domain(domain, api_key)
+    resultObject = result.json()
+    domain_report_result = resultObject
+    return domain_report_result, "DomainReport"

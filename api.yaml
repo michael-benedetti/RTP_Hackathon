@@ -61,3 +61,19 @@ actions:
       Report:
         schema:
           type: object
+  virus total domain report:
+    run: app.domain_report
+    description: Returns Virus Total Domain Report
+    parameters:
+      - name: domain
+        description: The domain to be checked
+        type: string
+        required: true
+      - name: api_key
+        description: Virus Total API Key
+        type: string
+        required: true
+    returns:
+      DomainReport:
+        schema:
+          type: object
