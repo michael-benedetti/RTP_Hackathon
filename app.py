@@ -2,12 +2,6 @@ import requests
 
 from apps import App, action
 
-def vt_api_post(file_hash, api_key):
-    params = {'apikey': api_key}
-    url = 'https://www.virustotal.com/vtapi/v2/file/report'
-    params['resource'] = file_hash
-    return requests.post(url, params)
-
 def vt_api_url_post(urlToGetReport, api_key):
     params = {'apikey': api_key}
     url = 'https://www.virustotal.com/vtapi/v2/url/report'
@@ -31,7 +25,10 @@ def vt_api_post_domain(domain, api_key):
 
 @action
 def hash_report(file_hash, api_key):
-    result = vt_api_post(file_hash, api_key)
+    helper_kwargs = {"resource": file_hash,
+                     "apikey": api_key}
+    api_endpoint = "v2/file/report"
+    result = vt_api_helper(api_endpoint, "POST", **helper_kwargs)
     resultObject = result.json()
     maliciousConfidence = resultObject["positives"]/resultObject["total"]
     return {"MaliciousConfidence": maliciousConfidence, "Report": resultObject}, "Report"
