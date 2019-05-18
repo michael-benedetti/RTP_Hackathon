@@ -29,7 +29,7 @@ def hash_report(file_hash, api_key):
     result = vt_api_helper(api_endpoint, "POST", **helper_kwargs)
     resultObject = result.json()
     maliciousConfidence = resultObject["positives"]/resultObject["total"]
-    return {"MaliciousConfidence": maliciousConfidence, "Report": resultObject}, "Report"
+    return {"MaliciousConfidence": maliciousConfidence, "Report": resultObject, "FileHash": file_hash}, "Report"
 
 
 @action

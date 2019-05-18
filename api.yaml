@@ -29,6 +29,8 @@ actions:
               type: number
             Report:
               type: object
+            FileHash:
+              type: string
   virus total ip report:
     run: app.ip_report
     description: Returns Virus Total IP Report
