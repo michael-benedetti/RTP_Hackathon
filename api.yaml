@@ -77,3 +77,23 @@ actions:
       DomainReport:
         schema:
           type: object
+  vt comment on file:
+    run: app.comment_on_file
+    description: Allows some rich output to be posted to a specifc file on Virus Total
+    parameters:
+      - name: comments
+        description: the output to Virus Total
+        type: string
+        required: true
+      - name: fileHash
+        description: the md5 sha1 sha256 file hash to comment on
+        type: string
+        required: true
+      - name: api_key
+        description: Virus Total API Key
+        type: string
+        required: true
+    returns:
+      Comment:
+        schema:
+          type: string
