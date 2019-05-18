@@ -1,9 +1,6 @@
-import logging
 import requests
 
 from apps import App, action
-
-logger = logging.getLogger("apps")
 
 def vt_api_post(file_hash, api_key):
     params = {'apikey': api_key}
@@ -14,7 +11,6 @@ def vt_api_post(file_hash, api_key):
 @action
 def is_file_hash_malicious(file_hash, api_key):
     result = vt_api_post(file_hash, api_key)
-    logger.debug("result: {}".format(result.json()))
     resultObject = result.json()
     maliciousConfidence = resultObject["positives"]/resultObject["total"]
-    return maliciousConfidence, "MaliciousConfidence"
+    return {"MaliciousConfidence": maliciousConfidence, "Report": resultObject}, "Report"

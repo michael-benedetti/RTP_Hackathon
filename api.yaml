@@ -4,16 +4,16 @@ info:
   title: FN_Agile
   description: An integration with the Virus Total API
   contact:
-    name: FN_Agile
+    name: FN_Agile techforce@jdi.socom.mil
   license:
     name: Creative Commons
 actions:
   is file hash malicious:
     run: app.is_file_hash_malicious
-    description: Returns True or False whether a file is identified as malicious or not by Virus Total
+    description: Returns Confidence Indicator that a file is malicious and the associate Virus Total report.
     parameters:
       - name: file_hash
-        description: the md5 of the file to be checked
+        description: the hash (md5, sha1, etc) of the file to be checked
         type: string
         required: true
       - name: api_key
@@ -21,6 +21,12 @@ actions:
         type: string
         required: true
     returns:
-      MaliciousConfidence:
+      Report:
         schema:
-          type: number
+          type: object
+          properties:
+            MaliciousConfidence:
+              type: number
+            Report:
+              type: object
+
