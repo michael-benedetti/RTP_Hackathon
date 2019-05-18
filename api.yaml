@@ -45,6 +45,19 @@ actions:
       IPAddressReport:
         schema:
           type: object
-
-
-
+  virus total url report:
+    run: app.virus_total_url_report
+    description: Returns a report for url that was scanned
+    parameters:
+      - name: url
+        description: the url to be checked
+        type: string
+        required: true
+      - name: api_key
+        description: Virus Total API Key
+        type: string
+        required: true
+    returns:
+      Report:
+        schema:
+          type: object

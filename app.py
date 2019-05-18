@@ -8,6 +8,13 @@ def vt_api_post(file_hash, api_key):
     params['resource'] = file_hash
     return requests.post(url, params)
 
+def vt_api_url_post(urlToGetReport, api_key):
+    params = {'apikey': api_key}
+    url = 'https://www.virustotal.com/vtapi/v2/url/report'
+    params['resource'] = urlToGetReport
+    params['scan'] = 1
+    return requests.post(url, params)
+
 
 def vt_api_post_ip_report(ip_address, api_key):
     params = {'apikey': api_key}
@@ -32,3 +39,8 @@ def ip_report(ip_address, api_key):
     ip_report_result = resultObject
     return ip_report_result, "IPAddressReport"
 
+
+@action
+def virus_total_url_report(url, api_key):
+    result = vt_api_url_post(url, api_key)
+    return result.json(), "Report"
