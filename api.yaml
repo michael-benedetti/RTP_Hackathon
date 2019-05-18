@@ -46,7 +46,7 @@ actions:
         schema:
           type: object
   virus total url report:
-    run: app.virus_total_url_report
+    run: app.url_report
     description: Returns a report for url that was scanned
     parameters:
       - name: url

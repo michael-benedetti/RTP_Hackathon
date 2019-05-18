@@ -41,6 +41,6 @@ def ip_report(ip_address, api_key):
 
 
 @action
-def virus_total_url_report(url, api_key):
+def url_report(url, api_key):
     result = vt_api_url_post(url, api_key)
     return result.json(), "Report"
