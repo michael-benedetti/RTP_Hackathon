@@ -8,14 +8,19 @@ info:
   license:
     name: Creative Commons
 actions:
-  test:
-    run: app.test
-    description: Returns an introductory message
+  is file malicious:
+    run: app.is_file_malicious
+    description: Returns True or False whether a file is identified as malicious or not by Virus Total
+    parameters:
+      - name: file_hash
+        description: the md5 of the file to be checked
+        type: string
+        required: true
+      - name: api_key
+        description: Virus Total API Key
+        type: string
+        required: true
     returns:
-      Success:
-        description: introductory message
+      Malicious:
         schema:
-          type: object
-          properties:
-            message:
-              type: string
+          type: boolean
