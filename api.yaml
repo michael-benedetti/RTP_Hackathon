@@ -8,8 +8,8 @@ info:
   license:
     name: Creative Commons
 actions:
-  is file hash malicious:
-    run: app.is_file_hash_malicious
+  virus total hash report:
+    run: app.hash_report
     description: Returns Confidence Indicator that a file is malicious and the associate Virus Total report.
     parameters:
       - name: file_hash

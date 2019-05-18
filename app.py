@@ -17,7 +17,7 @@ def vt_api_post_ip_report(ip_address, api_key):
 
 
 @action
-def is_file_hash_malicious(file_hash, api_key):
+def hash_report(file_hash, api_key):
     result = vt_api_post(file_hash, api_key)
     resultObject = result.json()
     maliciousConfidence = resultObject["positives"]/resultObject["total"]
